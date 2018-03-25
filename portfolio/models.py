@@ -33,16 +33,20 @@ class Volunteer(models.Model):
 
 
 class Inventory(models.Model):
-    donor = models.CharField(max_length=50)
-    item_code = models.IntegerField(primary_key=True,blank=False, null=False)
-    item_name = models.CharField(primary_key=True,max_length=200)
-    item_quantity = models.IntegerField(blank=False)
-    acquired_date = models.DateField(default=timezone.now)
+    item_code = models.IntegerField(blank=False, null=False)
+    item_name = models.CharField(max_length=50)
+
+    created_date = models.DateField(default=timezone.now)
+
+    class Meta:
+        unique_together= ('item_code','item_name')
 
     def created(self):
-        self.acquired_date = timezone.now()
+        self.created_date = timezone.now()
         self.save()
 
+    def __str__(self):
+        return str(self.item_name)
 
 class Client(models.Model):
     client_ID = models.IntegerField(blank=False, null=False)
@@ -62,7 +66,44 @@ class Client(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.client_ID)
+        return str(self.fname)
 
 
+class Visit(models.Model):
+    name = models.ForeignKey(Client,related_name='visits')
+    item= models.ForeignKey(Inventory,related_name='items')
+    item_quantity= models.DecimalField(max_digits=10,decimal_places=1)
+    visit_date=models.DateField(default=timezone.now)
 
+    def created(self):
+        self.visit_date=timezone.now()
+        self.save()
+
+    def __str__(self):
+        return str(self.name)
+
+class Donor(models.Model):
+    donor_name= models.CharField(max_length=50)
+    notes= models.CharField(max_length=50)
+    join_date=models.DateField(default=timezone.now)
+
+    def created(self):
+        self.join_date=timezone.now()
+        self.save()
+
+    def __str__(self):
+        return str(self.donor_name)
+
+
+class Donation(models.Model):
+    item = models.ForeignKey(Inventory,related_name='donations')
+    donor= models.ForeignKey(Donor, related_name='donorname')
+    quantity = models.DecimalField(max_digits=10,decimal_places=1)
+    received_date=models.DateField(default=timezone.now)
+
+    def created(self):
+        self.received_date=timezone.now()
+        self.save()
+
+    def __str__(self):
+        return str(self.donor)

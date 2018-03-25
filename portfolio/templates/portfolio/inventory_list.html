@@ -25,9 +25,8 @@
             <tr class="bg-info">
                 <th>Item Code</th>
                 <th>Item Name</th>
-                <th>Donor Name</th>
-                <th>Item Quantity</th>
-                <th>Acquired Date</th>
+
+
 		        <th colspan="3">Actions</th>
             </tr>
             </thead>
@@ -36,9 +35,8 @@
                 <tr>
                     <td>{{ inventory.item_code }}</td>
                     <td>{{ inventory.item_name }}</td>
-                    <td>{{ inventory.donor }}</td>
-                    <td>{{ inventory.item_quantity }}</td>
-                    <td>{{ inventory.acquired_date }}</td>
+
+
 
                     <td><a href="{% url 'portfolio:inventory_edit' pk=inventory.pk %}"
                            class="btn btn-warning">Edit</a></td>
@@ -46,6 +44,7 @@
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
+                    <td><a href="{% url 'portfolio:itemstotal' pk=inventory.pk %}" class="btn btn-primary">Total</a></td>
                 </tr>
             {% endfor %}
             </tbody>

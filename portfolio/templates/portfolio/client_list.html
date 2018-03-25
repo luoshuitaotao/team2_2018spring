@@ -50,6 +50,7 @@
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
+                    <td><a href="{% url 'portfolio:trackvisits' pk=client.pk %}" class="btn btn-primary">Track Visits</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -57,6 +58,10 @@
                <div class="row">
                     <a href="{% url 'portfolio:client_new' %}" class="row"><span
                             class="btn btn-primary">Add Client</span></a>
+                    <a href="{% url 'portfolio:client_search' %}" class="row"><span
+                            class="btn btn-primary">Track Visits</span></a>
+                    <a href="{% url 'portfolio:visit_list' %}" class="row"><span
+                            class="btn btn-primary">View Visits</span></a>
                </div>
     </div>
     </body>

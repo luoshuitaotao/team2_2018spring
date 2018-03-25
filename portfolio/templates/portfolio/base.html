@@ -79,7 +79,7 @@
                <!-- <li><a href="{% url 'portfolio:volunteer_list' %}">Volunteer</a></li>  -->
                 <li><a href="{% url 'portfolio:inventory_list' %}">Inventory</a></li>
                 <li><a href="{% url 'portfolio:client_list' %}">Clients</a></li>
-                <li><a href="{% url 'portfolio:home' %}">Donations</a></li>
+                <li><a href="{% url 'portfolio:donation_list' %}">Donations</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
@@ -89,6 +89,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li><a href="{% url 'portfolio:change_password' %}"><i class="fa fa-btn fa-password"></i>Change Password</a></li>
                         </ul>
                     </li>
                 {% else %}
@@ -147,9 +148,9 @@
                             <div class="thumbnail">
                                 <img src="{% static "images/mutualfunds.jpg" %}" alt="mutualfunds"/>
                                 <div class="caption">
-                                    <h2>Inventory</h2>
+                                    <h2>Donations</h2>
 
-                                    <p><a class="btn btn-default" href="{% url 'portfolio:home' %}"
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:donation_list' %}"
                                           role="button">View
                                         details &raquo;</a></p>
                                 </div>
